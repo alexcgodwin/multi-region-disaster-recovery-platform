@@ -34,10 +34,8 @@ flowchart TD
 
 ## Validation
 
-```bash
-cd terraform
-terraform init -backend=false
-terraform validate
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/validate.ps1
 ```
 
 ## Cost Control

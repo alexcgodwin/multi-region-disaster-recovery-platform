@@ -16,13 +16,13 @@ flowchart TD
     D --> E[Recovery Evidence]
 ```
 
-## What This Proves
+## What This Project Demonstrates
 
 - RTO/RPO-based recovery planning.
 - Active/passive multi-region design.
 - Infrastructure-as-code recovery strategy.
 - Failover runbook creation.
-- Cost-aware disaster recovery without always-on duplicate compute.
+- Cost-controlled disaster recovery design with reusable validation evidence.
 
 ## Repository Structure
 
@@ -40,9 +40,9 @@ powershell -ExecutionPolicy Bypass -File scripts/validate.ps1
 
 ## Cost Control
 
-The design avoids permanent standby compute for portfolio validation. A live test should use minimal temporary resources, collect evidence, then destroy resources immediately.
+This project uses a controlled validation model: recovery architecture, runbooks and evidence are maintained from code while cost exposure is kept under control.
 
-## Interview Talking Points
+## Engineering Talking Points
 
 - Difference between backup and recoverability.
 - How RTO/RPO shape architecture and cost.

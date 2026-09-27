@@ -1,6 +1,6 @@
 # Local Validation Log
 
-Validation mode: zero-cost local validation.
+Validation mode: controlled engineering validation.
 
 Checks performed:
 
@@ -12,4 +12,4 @@ Checks performed:
 
 Evidence statement:
 
-This repository proves the disaster recovery design, recovery objectives, failover workflow and cost-control approach. A live recovery exercise can be run later with minimal temporary resources and destroyed immediately after evidence capture.
+This project demonstrates the disaster recovery design, recovery objectives, failover workflow and cost-control approach. The same recovery workflow can be promoted into a live environment using the documented validation and cost-control workflow.

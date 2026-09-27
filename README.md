@@ -1,36 +1,31 @@
 # Multi-Region Disaster Recovery Platform
 
-A resilience engineering project that demonstrates how to design, document and validate an active/passive disaster recovery platform with clear RTO/RPO targets.
+A resilience engineering project that defines and validates an active/passive recovery platform with clear RTO/RPO considerations, failover responsibilities and evidence.
 
-## Problem
+## What I Built
 
-Many cloud systems have backups but no tested recovery workflow. This project focuses on the operational side of resilience: what fails, how traffic moves, how data recovery is verified, and what evidence proves the recovery path works.
+- Active/passive multi-region recovery model.
+- Infrastructure-as-code structure for primary and recovery responsibilities.
+- Failover runbook covering decisions, traffic movement and verification.
+- Evidence that distinguishes backup capability from tested recoverability.
 
-## Architecture
+## Recovery Workflow
 
-```mermaid
-flowchart TD
-    A[Primary Region] --> B[Health Check]
-    B --> C[Failover Decision]
-    C --> D[Secondary Region]
-    D --> E[Recovery Evidence]
-```
-
-## What This Project Demonstrates
-
-- RTO/RPO-based recovery planning.
-- Active/passive multi-region design.
-- Infrastructure-as-code recovery strategy.
-- Failover runbook creation.
-- Cost-controlled disaster recovery design with reusable validation evidence.
+1. Define RTO and RPO targets.
+2. Prepare the secondary recovery region.
+3. Detect failure through health and operational signals.
+4. Execute the approved failover runbook.
+5. Verify service, data and dependencies.
+6. Review gaps and improve the recovery path.
 
 ## Repository Structure
 
 | Path | Purpose |
 | --- | --- |
 | `terraform/` | DR strategy outputs and region variables. |
-| `runbooks/` | Step-by-step failover procedure. |
-| `docs/evidence/` | Validation summary and evidence notes. |
+| `runbooks/` | Failover and recovery procedures. |
+| `docs/evidence/` | Validation and recovery evidence. |
+| `scripts/` | Repeatable validation commands. |
 
 ## Validation
 
@@ -38,13 +33,10 @@ flowchart TD
 powershell -ExecutionPolicy Bypass -File scripts/validate.ps1
 ```
 
-## Cost Control
+## Completed Result
 
-This project uses a controlled validation model: recovery architecture, runbooks and evidence are maintained from code while cost exposure is kept under control.
+A documented and validated recovery pattern with recovery objectives, infrastructure structure, failover procedures and evidence.
 
-## Engineering Talking Points
+## Engineering Value
 
-- Difference between backup and recoverability.
-- How RTO/RPO shape architecture and cost.
-- Why runbooks matter during incidents.
-- What evidence proves a recovery workflow is real.
+This project demonstrates recoverability planning, operational ownership, runbook discipline, failure validation and cost-aware resilience engineering.

@@ -1,35 +1,37 @@
 # Multi-Region Disaster Recovery Platform
 
-A resilience engineering project that defines and validates an active/passive recovery platform with clear RTO/RPO considerations, failover responsibilities and evidence.
+A resilience engineering project that demonstrates how to design, document and validate an active/passive disaster recovery platform with clear RTO/RPO targets.
 
-## What I Built
+![Disaster recovery architecture](assets/dr-architecture.svg)
 
-- Active/passive multi-region recovery model.
-- Infrastructure-as-code structure for primary and recovery responsibilities.
-- Failover runbook covering decisions, traffic movement and verification.
-- Evidence that distinguishes backup capability from tested recoverability.
+## Executive Summary
 
-## Recovery Workflow
+This project focuses on recoverability, not only backups. It documents the operating path for detecting regional failure, deciding when to fail over, recovering service in a secondary region, validating the recovery path and preserving evidence.
 
-1. Define RTO and RPO targets.
-2. Prepare the secondary recovery region.
-3. Detect failure through health and operational signals.
-4. Execute the approved failover runbook.
-5. Verify service, data and dependencies.
-6. Review gaps and improve the recovery path.
+## Problem
+
+Many cloud systems have backups but no tested recovery workflow. During an incident, the missing parts are usually ownership, decision criteria, data-loss expectations, rollback steps and proof that the recovery path has been exercised.
+
+## Engineering Scope
+
+| Area | Implementation |
+| --- | --- |
+| Recovery model | Active/passive regional design |
+| Objectives | RTO/RPO language and trade-off notes |
+| Infrastructure | Terraform outputs and region variables |
+| Operations | Failover runbook with operator steps |
+| Evidence | Validation summary and local validation log |
+| Cost control | Architecture and proof maintained from code without always-on duplicate spend |
 
 ## Repository Structure
 
 | Path | Purpose |
 | --- | --- |
-| `terraform/` | DR strategy outputs and region variables. |
-| `runbooks/` | Failover and recovery procedures. |
-| `docs/evidence/` | Validation and recovery evidence. |
-| `scripts/` | Repeatable validation commands. |
-
-## Continuous Validation
-
-GitHub Actions checks Terraform formatting and validation, then verifies that the recovery runbook contains RTO, RPO and rollback controls.
+| `terraform/` | DR strategy outputs and region variables |
+| `runbooks/failover.md` | Step-by-step failover procedure |
+| `scripts/validate.ps1` | Validation checks |
+| `docs/evidence/` | Validation summary and evidence notes |
+| `assets/` | Architecture visual used in the README |
 
 ## Validation
 
@@ -37,23 +39,18 @@ GitHub Actions checks Terraform formatting and validation, then verifies that th
 powershell -ExecutionPolicy Bypass -File scripts/validate.ps1
 ```
 
-## Engineering Controls
+## Production Expansion Path
 
-| Control | Senior engineering concern |
-| --- | --- |
-| Objectives | RTO and RPO aligned to business impact. |
-| Detection | Health signals and explicit recovery decisioning. |
-| Execution | Owned failover runbook with verification steps. |
-| Proof | Service, data and dependency recovery evidence. |
+- Add health checks tied to DNS failover or traffic manager.
+- Add backup replication and restore testing for the selected data tier.
+- Define incident commander, approver and rollback responsibilities.
+- Schedule recovery exercises and retain evidence per environment.
+- Track RTO/RPO performance after each exercise.
 
-## Failure and Review Model
+## Interview Defense
 
-The design considers regional loss, dependency failure, stale data, incomplete failover and rollback conditions. Recovery is treated as an exercised operating capability, not a backup checkbox.
+The important engineering decision is the separation between backup and recovery. A backup is only an asset. A recovery platform needs a tested path, a decision model, a runbook and proof. This repo is structured around that operating reality.
 
-## Completed Result
+## Status
 
-A documented and validated recovery pattern with recovery objectives, infrastructure structure, failover procedures and evidence.
-
-## Engineering Value
-
-This project demonstrates recoverability planning, operational ownership, runbook discipline, failure validation and cost-aware resilience engineering.
+Validated as a cost-controlled disaster recovery design with reusable infrastructure, runbook and evidence artifacts.

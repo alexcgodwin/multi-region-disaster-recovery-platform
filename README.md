@@ -33,6 +33,19 @@ A resilience engineering project that defines and validates an active/passive re
 powershell -ExecutionPolicy Bypass -File scripts/validate.ps1
 ```
 
+## Engineering Controls
+
+| Control | Senior engineering concern |
+| --- | --- |
+| Objectives | RTO and RPO aligned to business impact. |
+| Detection | Health signals and explicit recovery decisioning. |
+| Execution | Owned failover runbook with verification steps. |
+| Proof | Service, data and dependency recovery evidence. |
+
+## Failure and Review Model
+
+The design considers regional loss, dependency failure, stale data, incomplete failover and rollback conditions. Recovery is treated as an exercised operating capability, not a backup checkbox.
+
 ## Completed Result
 
 A documented and validated recovery pattern with recovery objectives, infrastructure structure, failover procedures and evidence.

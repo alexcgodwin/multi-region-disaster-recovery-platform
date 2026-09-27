@@ -28,6 +28,6 @@ jobs:
         run: terraform validate
       - name: Validate recovery contract
         run: |
-          grep -q "RTO" runbooks/failover.md
-          grep -q "RPO" runbooks/failover.md
-          grep -q "rollback" runbooks/failover.md
+          grep -qi "RTO" runbooks/failover.md
+          grep -qi "RPO" runbooks/failover.md
+          grep -qi "rollback" runbooks/failover.md

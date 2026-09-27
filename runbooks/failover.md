@@ -15,6 +15,10 @@ Use this runbook when the primary region is unavailable or the application fails
 7. Notify stakeholders with RTO/RPO status.
 8. Keep primary region isolated until root cause is understood.
 
+## Rollback
+
+If recovery validation fails, keep traffic on the secondary region, preserve evidence, and reverse the routing change only after the incident owner approves rollback.
+
 ## Recovery evidence
 
 Capture health checks, DNS routing result, backup timestamp, application smoke test and post-failover resource state.

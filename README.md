@@ -27,6 +27,10 @@ A resilience engineering project that defines and validates an active/passive re
 | `docs/evidence/` | Validation and recovery evidence. |
 | `scripts/` | Repeatable validation commands. |
 
+## Continuous Validation
+
+GitHub Actions checks Terraform formatting and validation, then verifies that the recovery runbook contains RTO, RPO and rollback controls.
+
 ## Validation
 
 ```powershell

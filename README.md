@@ -31,6 +31,7 @@ Many cloud systems have backups but no tested recovery workflow. During an incid
 | `runbooks/failover.md` | Step-by-step failover procedure |
 | `scripts/validate.ps1` | Validation checks |
 | `docs/evidence/` | Validation summary and evidence notes |
+| `docs/adr/` | Architecture and recovery decisions |
 | `assets/` | Architecture visual used in the README |
 
 ## Validation
@@ -47,9 +48,21 @@ powershell -ExecutionPolicy Bypass -File scripts/validate.ps1
 - Schedule recovery exercises and retain evidence per environment.
 - Track RTO/RPO performance after each exercise.
 
-## Interview Defense
+## Evidence Index
 
-The important engineering decision is the separation between backup and recovery. A backup is only an asset. A recovery platform needs a tested path, a decision model, a runbook and proof. This repo is structured around that operating reality.
+- Recovery objectives and region model: `terraform/main.tf`
+- Failover procedure: `runbooks/failover.md`
+- Failure-domain architecture: `docs/architecture.md`
+- Validation summary: `docs/evidence/validation-summary.md`
+- Recovery decision: `docs/adr/0001-active-passive-recovery.md`
+
+## Engineering Rationale
+
+The key distinction is between backup and recoverability. A backup is an asset; a recovery capability also requires explicit decision criteria, ownership, a failover procedure, service and data verification, rollback conditions and retained evidence.
+
+## Tradeoffs and Boundaries
+
+Active/passive recovery reduces standing cost compared with active/active operation, but it increases dependence on detection, decision speed, data-freshness checks and a disciplined failover process. The repository demonstrates the recovery operating model and validation logic without claiming a permanently funded secondary production stack.
 
 ## Status
 

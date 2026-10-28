@@ -1,0 +1,4 @@
+primary_aws_region = "ca-central-1"
+recovery_aws_region = "us-east-1"
+project_prefix = "resilience-lab"
+enable_dns_failover = false

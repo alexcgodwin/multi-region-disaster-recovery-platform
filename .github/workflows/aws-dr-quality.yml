@@ -1,0 +1,37 @@
+name: AWS DR reference and failure-drill checks
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  recovery-evidence:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Test failover authorization and replication staleness
+        run: python -m unittest discover -s tests -v
+      - name: Approved local simulation only
+        run: python simulations/recovery_drill.py --approve --evidence artifacts/drill.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: simulated-recovery-evidence
+          path: artifacts/drill.json
+  validate-aws-terraform:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: hashicorp/setup-terraform@v4
+        with:
+          terraform_version: 1.15.8
+      - name: Format
+        run: terraform -chdir=terraform/aws-dr fmt -check -recursive
+      - name: Init without cloud backend
+        run: terraform -chdir=terraform/aws-dr init -backend=false -input=false
+      - name: Validate provider schemas
+        run: terraform -chdir=terraform/aws-dr validate

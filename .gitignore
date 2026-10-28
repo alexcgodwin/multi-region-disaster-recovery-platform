@@ -3,3 +3,15 @@
 *.tfstate.*
 .terraform.lock.hcl
 .DS_Store
+
+# Terraform generated packages and local state
+**/.terraform/
+**/*.tfstate
+**/*.tfstate.*
+**/*.tfvars
+!**/*.tfvars.example
+**/worker.zip
+**/ingest.zip
+# Python transient test files
+**/__pycache__/
+**/*.pyc

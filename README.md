@@ -67,3 +67,9 @@ Active/passive recovery reduces standing cost compared with active/active operat
 ## Status
 
 Validated as a cost-controlled disaster recovery design with reusable infrastructure, runbook and evidence artifacts.
+
+## Deployable AWS disaster recovery reference
+
+The original `terraform/` directory remains an output-only recovery strategy model using Azure region labels. A new independent [AWS cross-region recovery stack](terraform/aws-dr/) defines two region-specific S3 backups, versioning, SSE-S3 encryption, TLS-only access, public access blocks, limited-scope S3 replication IAM, and optional **disabled-by-default** Route 53 failover records against user-controlled existing service endpoints.
+
+A [measured local failure drill](simulations/recovery_drill.py) now injects unavailable primary, stale replica and failed recovery health scenarios and rejects cutovers without approval. CI records simulated RPO and recovery time as reproducible artifacts. It does **not** prove live end-to-end service RTO/RPO, database recovery, or a production traffic failover. Read the [AWS deployment and validation boundary](docs/AWS_DR_EXERCISES.md). Applying the AWS stack would create billable infrastructure and has not been performed.
